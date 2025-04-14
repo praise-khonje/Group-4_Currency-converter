@@ -78,10 +78,10 @@ class SettingsPage extends StatelessWidget {
             onTap: () => _showLanguageDialog(context, languages),
           ),
           const Divider(),
-          ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: const Text('About App'),
-            subtitle: const Text('Version 1.0.0\nDeveloped by group 4:\n 1.Praise khonje\n 2.joshau chilapondwa\n 3.aaliyah mbowani\n 4. augustine njala\n 5. paul narcisse'),
+          const ListTile(
+            leading: Icon(Icons.info_outline),
+            title: Text('About App'),
+            subtitle: Text('Version 1.0.0\nDeveloped by group 4:\n 1.Praise khonje\n 2.joshua chilapondwa\n 3.aaliyah mbowani\n 4. augustine njala\n 5. paul narcisse'),
             isThreeLine: true,
           ),
         ],
