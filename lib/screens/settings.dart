@@ -12,14 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _isDarkMode = false;
   String _language = 'English';
-
-  void _toggleTheme(bool isDark) {
-    setState(() {
-      _isDarkMode = isDark;
-    });
-  }
 
   void _changeLanguage(String newLang) {
     setState(() {
@@ -32,11 +25,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Settings Page Demo',
       debugShowCheckedModeBanner: false,
-      theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
+      theme: ThemeData.light(), // Only light theme used
       home: SettingsPage(
-        isDarkMode: _isDarkMode,
         currentLanguage: _language,
-        onThemeChanged: _toggleTheme,
         onLanguageChanged: _changeLanguage,
       ),
     );
@@ -44,22 +35,33 @@ class _MyAppState extends State<MyApp> {
 }
 
 class SettingsPage extends StatelessWidget {
-  final bool isDarkMode;
   final String currentLanguage;
-  final Function(bool) onThemeChanged;
   final Function(String) onLanguageChanged;
 
   const SettingsPage({
     super.key,
-    required this.isDarkMode,
     required this.currentLanguage,
-    required this.onThemeChanged,
     required this.onLanguageChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    final List<String> languages = ['English', 'Spanish', 'French', 'German'];
+    final List<String> languages = [
+      'English',
+      'Spanish',
+      'French',
+      'German',
+      'Chichewa',
+      'Swahili',
+      'Arabic',
+      'Chinese',
+      'Portuguese',
+      'Hindi',
+      'Zulu',
+      'Afrikaans',
+      'Italian',
+      'Japanese',
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -68,13 +70,6 @@ class SettingsPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          SwitchListTile(
-            title: const Text('Dark Mode'),
-            value: isDarkMode,
-            onChanged: onThemeChanged,
-            secondary: const Icon(Icons.brightness_6),
-          ),
-          const Divider(),
           ListTile(
             leading: const Icon(Icons.language),
             title: const Text('Language'),
@@ -101,20 +96,23 @@ class SettingsPage extends StatelessWidget {
         return AlertDialog(
           title: const Text('Select Language'),
           content: StatefulBuilder(
-            builder: (context, setState) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: languages.map((lang) {
-                return RadioListTile(
-                  title: Text(lang),
-                  value: lang,
-                  groupValue: selected,
-                  onChanged: (value) {
-                    setState(() {
-                      selected = value!;
-                    });
-                  },
-                );
-              }).toList(),
+            builder: (context, setState) => SizedBox(
+              width: double.maxFinite,
+              child: ListView(
+                shrinkWrap: true,
+                children: languages.map((lang) {
+                  return RadioListTile(
+                    title: Text(lang),
+                    value: lang,
+                    groupValue: selected,
+                    onChanged: (value) {
+                      setState(() {
+                        selected = value!;
+                      });
+                    },
+                  );
+                }).toList(),
+              ),
             ),
           ),
           actions: [
