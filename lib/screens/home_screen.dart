@@ -28,7 +28,7 @@ class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
 
   @override
-  _HomeTabState createState() => _HomeTabState();
+  State<HomeTab> createState() => _HomeTabState();
 }
 
 class _HomeTabState extends State<HomeTab> {
@@ -276,7 +276,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {

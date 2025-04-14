@@ -6,7 +6,7 @@ class NewsFeed extends StatefulWidget {
   const NewsFeed({super.key});
 
   @override
-  _NewsFeedState createState() => _NewsFeedState();
+  State<NewsFeed> createState() => _NewsFeedState();
 }
 
 class _NewsFeedState extends State<NewsFeed> {
@@ -36,7 +36,9 @@ class _NewsFeedState extends State<NewsFeed> {
         throw Exception('Failed to load exchange rates');
       }
     } catch (e) {
-      print('Error fetching data: $e');
+      SnackBar(content: SnackBar(content:
+      Text('error fetching data: $e')),
+      );
       setState(() {
         isLoading = false;
       });

@@ -1,4 +1,3 @@
-import 'package:currency_converter_group_4/screens/news_feed.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 
