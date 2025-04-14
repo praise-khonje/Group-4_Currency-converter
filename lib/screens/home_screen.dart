@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 import 'news_feed.dart';
 import 'settings.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+Future<Map<String, dynamic>> fetchConversionRates() async {
+  const String apiUrl = 'https://v6.exchangerate-api.com/v6/c8d2092077c56bcb81d07b7f/latest/USD';
+  try {
+    final response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['conversion_rates'] != null) {
+        return data['conversion_rates'];
+      } else {
+        throw Exception('Rates not found in response.');
+      }
+    } else {
+      throw Exception('Failed to fetch rates. Status code: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error fetching rates: $e');
+    throw Exception('Error fetching rates: $e');
+  }
+}
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -46,6 +68,38 @@ class _HomeTabState extends State<HomeTab> {
       ),
     ))
         .toList();
+  }
+
+  void _calculateConversion() async {
+    if (_amountController.text.isNotEmpty) {
+      double amount = double.tryParse(_amountController.text) ?? 0.0;
+
+      if (amount <= 0) {
+        setState(() {
+          result = 'Invalid amount entered.';
+        });
+        return;
+      }
+
+      try {
+        Map<String, dynamic> rates = await fetchConversionRates();
+
+        if (rates.containsKey(toCurrency) && rates.containsKey(fromCurrency)) {
+          double conversionRate = rates[toCurrency]! / rates[fromCurrency]!;
+          setState(() {
+            result = (amount * conversionRate).toStringAsFixed(2);
+          });
+        } else {
+          setState(() {
+            result = 'Conversion rate not available.';
+          });
+        }
+      } catch (e) {
+        setState(() {
+          result = 'Error fetching rates: $e';
+        });
+      }
+    }
   }
 
   @override
@@ -119,7 +173,7 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _calculateConversion,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -217,6 +271,7 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 }
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -237,9 +292,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,  // This will center the title
           title: const Text('Currency App'),
-          backgroundColor: Colors.black45
+          backgroundColor: Colors.white
       ),
       body: _tabs[_selectedTabIndex],
       bottomNavigationBar: BottomNavigationBar(
