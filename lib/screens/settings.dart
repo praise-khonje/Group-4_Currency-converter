@@ -80,7 +80,7 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: const Text('About App'),
-            subtitle: const Text('Version 1.0.0\nDeveloped by Team 4'),
+            subtitle: const Text('Version 1.0.0\nDeveloped by group 4:\n 1.Praise khonje\n 2.joshau chilapondwa\n 3.aaliyah mbowani\n 4. augustine njala\n 5. paul narcisse'),
             isThreeLine: true,
           ),
         ],
