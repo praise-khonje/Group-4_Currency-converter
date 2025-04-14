@@ -125,18 +125,34 @@ class _NewsFeedState extends State<NewsFeed> {
                         child: Column(
                           children: [
                             ListTile(
-                              leading: Icon(Icons.currency_ruble, color: Colors.orange),
+                              leading: Text(
+                                'R',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               title: const Text('ZAR/MWK'),
                               subtitle: Text(
-                                  'Exchange Rate: ${((1/forexRates?['ZAR']).ceil()).toString() ?? 'N/A'} MWK'),
+                                  'Exchange Rate: ${((1 / forexRates?['ZAR']).ceil()).toString() ?? 'N/A'} MWK'),
                             ),
+
                             const Divider(),
                             ListTile(
-                              leading: Icon(Icons.currency_bitcoin, color: Colors.brown),
+                              leading: Text(
+                                'Z\$',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.brown,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               title: const Text('ZWL/MWK'),
                               subtitle: Text(
-                                  'Exchange Rate: ${((1/forexRates?['ZWL']).ceil()).toString() ?? 'N/A'} MWK'),
+                                  'Exchange Rate: ${((1 / forexRates?['ZWL']).ceil()).toString() ?? 'N/A'} MWK'),
                             ),
+
                             const Divider(),
                             ListTile(
                               leading: Icon(Icons.currency_yuan, color: Colors.pink),
