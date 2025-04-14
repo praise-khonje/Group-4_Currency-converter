@@ -5,7 +5,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Map<String, dynamic>> fetchConversionRates() async {
-  const String apiUrl = 'https://v6.exchangerate-api.com/v6/c8d2092077c56bcb81d07b7f/latest/USD';
+  const String apiUrl =
+      'https://v6.exchangerate-api.com/v6/c8d2092077c56bcb81d07b7f/latest/USD';
   try {
     final response = await http.get(Uri.parse(apiUrl));
     if (response.statusCode == 200) {
@@ -16,10 +17,13 @@ Future<Map<String, dynamic>> fetchConversionRates() async {
         throw Exception('Rates not found in response.');
       }
     } else {
-      throw Exception('Failed to fetch rates. Status code: ${response.statusCode}');
+      throw Exception(
+          'Failed to fetch rates. Status code: ${response.statusCode}');
     }
   } catch (e) {
-    SnackBar(content: SnackBar(content: Text('Error fetching rates: $e')),);
+    SnackBar(
+      content: SnackBar(content: Text('Error fetching rates: $e')),
+    );
     throw Exception('Error fetching rates: $e');
   }
 }
@@ -58,15 +62,15 @@ class _HomeTabState extends State<HomeTab> {
   List<DropdownMenuItem<String>> _buildCurrencyDropdownItems() {
     return currencies.entries
         .map((entry) => DropdownMenuItem(
-      value: entry.key,
-      child: Row(
-        children: [
-          Text(entry.value, style: const TextStyle(fontSize: 20)),
-          const SizedBox(width: 8),
-          Text(entry.key),
-        ],
-      ),
-    ))
+              value: entry.key,
+              child: Row(
+                children: [
+                  Text(entry.value, style: const TextStyle(fontSize: 20)),
+                  const SizedBox(width: 8),
+                  Text(entry.key),
+                ],
+              ),
+            ))
         .toList();
   }
 
@@ -113,7 +117,8 @@ class _HomeTabState extends State<HomeTab> {
           // Input Card
           Card(
             elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -136,7 +141,8 @@ class _HomeTabState extends State<HomeTab> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.swap_horiz, size: 32, color: Colors.black),
+                        icon: const Icon(Icons.swap_horiz,
+                            size: 32, color: Colors.black),
                         onPressed: () {
                           setState(() {
                             String temp = fromCurrency;
@@ -175,8 +181,10 @@ class _HomeTabState extends State<HomeTab> {
                   ElevatedButton(
                     onPressed: _calculateConversion,
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 20),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
                       backgroundColor: Colors.blue.shade700,
                       foregroundColor: Colors.black,
                     ),
@@ -197,7 +205,8 @@ class _HomeTabState extends State<HomeTab> {
           // Result Card
           Card(
             elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -205,14 +214,19 @@ class _HomeTabState extends State<HomeTab> {
                   Text(
                     'Converted Amount',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    result.isEmpty ? 'No Conversion Yet' : '$result $toCurrency',
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+                    result.isEmpty
+                        ? 'No Conversion Yet'
+                        : '$result $toCurrency',
+                    style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                 ],
               ),
@@ -238,7 +252,8 @@ class _HomeTabState extends State<HomeTab> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.account_balance_wallet, color: Colors.black, size: 30),
+                    Icon(Icons.account_balance_wallet,
+                        color: Colors.black, size: 30),
                     SizedBox(width: 10),
                     Text(
                       'Malawian Exchange \n Bureau & Stock Data',
@@ -253,14 +268,14 @@ class _HomeTabState extends State<HomeTab> {
                 SizedBox(height: 16),
                 Text(
                   'The Malawian Kwacha (MWK) is primarily traded against major currencies such as USD, ZAR, and EUR. Current rates are as follows (assumed):\n\n'
-                      '1 USD = 1160 MWK\n'
-                      '1 EUR = 1250 MWK\n'
-                      '1 ZAR = 75 MWK\n\n'
-                      'Stock Market (Assumed Data):\n'
-                      '- Illovo Sugar Plc: MWK 450/share\n'
-                      '- National Bank of Malawi: MWK 1050/share\n'
-                      '- Airtel Malawi: MWK 85/share\n\n'
-                      'These rates and stock data are sourced from reliable financial institutions.',
+                  '1 USD = 1160 MWK\n'
+                  '1 EUR = 1250 MWK\n'
+                  '1 ZAR = 75 MWK\n\n'
+                  'Stock Market (Assumed Data):\n'
+                  '- Illovo Sugar Plc: MWK 450/share\n'
+                  '- National Bank of Malawi: MWK 1050/share\n'
+                  '- Airtel Malawi: MWK 85/share\n\n'
+                  'These rates and stock data are sourced from reliable financial institutions.',
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ],
@@ -285,16 +300,18 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _tabs = [
     const HomeTab(),
     const NewsFeed(),
-    const SettingsPage(),
+    SettingsPage(
+  currentLanguage: 'English',
+  onLanguageChanged: (newLang) {
+  },
+),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Currency App'),
-          backgroundColor: Colors.white
-      ),
+          title: const Text('Currency App'), backgroundColor: Colors.white),
       body: _tabs[_selectedTabIndex],
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedTabIndex,
@@ -319,8 +336,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.deepPurple,
-          backgroundColor: Colors.white
-      ),
+          backgroundColor: Colors.white),
     );
   }
 }
