@@ -19,7 +19,7 @@ Future<Map<String, dynamic>> fetchConversionRates() async {
       throw Exception('Failed to fetch rates. Status code: ${response.statusCode}');
     }
   } catch (e) {
-    print('Error fetching rates: $e');
+    SnackBar(content: SnackBar(content: Text('Error fetching rates: $e')),);
     throw Exception('Error fetching rates: $e');
   }
 }
@@ -227,7 +227,7 @@ class _HomeTabState extends State<HomeTab> {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withAlpha(100),
                   blurRadius: 8,
                   offset: const Offset(0, 4),
                 ),
