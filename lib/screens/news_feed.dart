@@ -90,21 +90,21 @@ class _NewsFeedState extends State<NewsFeed> {
                         child: Column(
                           children: [
                             ListTile(
-                              leading: Icon(Icons.attach_money, color: Colors.green),
+                              leading: const Icon(Icons.attach_money, color: Colors.green),
                               title: const Text('USD/MWK'),
                               subtitle: Text(
                                   'Exchange Rate: ${((1/forexRates?['USD']).ceil()).toString() ?? 'N/A'} MWK'),
                             ),
                             const Divider(),
                             ListTile(
-                              leading: Icon(Icons.euro, color: Colors.blue),
+                              leading: const Icon(Icons.euro, color: Colors.blue),
                               title: const Text('EUR/MWK'),
                               subtitle: Text(
                                   'Exchange Rate: ${((1/forexRates?['EUR']).ceil()).toString() ?? 'N/A'} MWK'),
                             ),
                             const Divider(),
                             ListTile(
-                              leading: Text(
+                              leading: const Text(
                                 '£',
                                 style: TextStyle(
                                   fontSize: 24,
@@ -125,7 +125,7 @@ class _NewsFeedState extends State<NewsFeed> {
                         child: Column(
                           children: [
                             ListTile(
-                              leading: Text(
+                              leading: const Text(
                                 'R',
                                 style: TextStyle(
                                   fontSize: 24,
@@ -140,7 +140,7 @@ class _NewsFeedState extends State<NewsFeed> {
 
                             const Divider(),
                             ListTile(
-                              leading: Text(
+                              leading: const Text(
                                 'Z\$',
                                 style: TextStyle(
                                   fontSize: 24,
@@ -155,7 +155,7 @@ class _NewsFeedState extends State<NewsFeed> {
 
                             const Divider(),
                             ListTile(
-                              leading: Icon(Icons.currency_yuan, color: Colors.pink),
+                              leading: const Icon(Icons.currency_yuan, color: Colors.pink),
                               title: const Text('CNY/MWK'),
                               subtitle: Text(
                                   'Exchange Rate: ${((1/forexRates?['CNY']).ceil()).toString() ?? 'N/A'} MWK'),

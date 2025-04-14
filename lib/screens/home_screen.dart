@@ -233,11 +233,11 @@ class _HomeTabState extends State<HomeTab> {
                 ),
               ],
             ),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Icon(Icons.account_balance_wallet, color: Colors.black, size: 30),
                     SizedBox(width: 10),
                     Text(
@@ -250,8 +250,8 @@ class _HomeTabState extends State<HomeTab> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: 16),
+                Text(
                   'The Malawian Kwacha (MWK) is primarily traded against major currencies such as USD, ZAR, and EUR. Current rates are as follows (assumed):\n\n'
                       '1 USD = 1160 MWK\n'
                       '1 EUR = 1250 MWK\n'
