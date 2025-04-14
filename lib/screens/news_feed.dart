@@ -95,14 +95,14 @@ class _NewsFeedState extends State<NewsFeed> {
                               leading: const Icon(Icons.attach_money, color: Colors.green),
                               title: const Text('USD/MWK'),
                               subtitle: Text(
-                                  'Exchange Rate: ${((1/forexRates?['USD']).ceil()).toString() ?? 'N/A'} MWK'),
+                                  'Exchange Rate: ${forexRates?['USD'] == null ? 'N/A' : (1 / forexRates!['USD']).ceil()} MWK'),
                             ),
                             const Divider(),
                             ListTile(
                               leading: const Icon(Icons.euro, color: Colors.blue),
                               title: const Text('EUR/MWK'),
                               subtitle: Text(
-                                  'Exchange Rate: ${((1/forexRates?['EUR']).ceil()).toString() ?? 'N/A'} MWK'),
+                                  'Exchange Rate: ${forexRates?['EUR'] == null ? 'N/A' : (1 / forexRates!['EUR']).ceil()} MWK'),
                             ),
                             const Divider(),
                             ListTile(
@@ -116,7 +116,7 @@ class _NewsFeedState extends State<NewsFeed> {
                               ),
                               title: const Text('GBP/MWK'),
                               subtitle: Text(
-                                  'Exchange Rate: ${((1/forexRates?['GBP']).ceil()).toString() ?? 'N/A'} MWK'),
+                                  'Exchange Rate: ${forexRates?['GBP'] == null ? 'N/A' : (1 / forexRates!['GBP']).ceil()} MWK'),
                             ),
                           ],
                         ),
@@ -137,7 +137,7 @@ class _NewsFeedState extends State<NewsFeed> {
                               ),
                               title: const Text('ZAR/MWK'),
                               subtitle: Text(
-                                  'Exchange Rate: ${((1 / forexRates?['ZAR']).ceil()).toString() ?? 'N/A'} MWK'),
+                                  'Exchange Rate: ${forexRates?['ZAR'] == null ? 'N/A' : (1 / forexRates!['ZAR']).ceil()} MWK'),
                             ),
 
                             const Divider(),
@@ -152,7 +152,7 @@ class _NewsFeedState extends State<NewsFeed> {
                               ),
                               title: const Text('ZWL/MWK'),
                               subtitle: Text(
-                                  'Exchange Rate: ${((1 / forexRates?['ZWL']).ceil()).toString() ?? 'N/A'} MWK'),
+                                  'Exchange Rate: ${forexRates?['ZWL'] == null ? 'N/A' : (1 / forexRates!['ZWL']).ceil()} MWK'),
                             ),
 
                             const Divider(),
@@ -160,7 +160,7 @@ class _NewsFeedState extends State<NewsFeed> {
                               leading: const Icon(Icons.currency_yuan, color: Colors.pink),
                               title: const Text('CNY/MWK'),
                               subtitle: Text(
-                                  'Exchange Rate: ${((1/forexRates?['CNY']).ceil()).toString() ?? 'N/A'} MWK'),
+                                  'Exchange Rate: ${forexRates?['CNY'] == null ? 'N/A' : (1 / forexRates!['CNY']).ceil()} MWK'),
                             ),
                           ],
                         ),
