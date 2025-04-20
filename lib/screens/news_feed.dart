@@ -72,7 +72,7 @@ class _NewsFeedState extends State<NewsFeed> {
                 ? const Center(
               child: Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Text('Failed to load forex rates. Please try again later.'),
+                child: Text('Failed to load forex rates, Please try again later.'),
               ),
             )
                 : Padding(
