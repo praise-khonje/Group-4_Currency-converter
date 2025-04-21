@@ -1,0 +1,2 @@
+D:/android_projects/Group-4_Currency-converter/android/app/.cxx/Debug/1c1kl313/x86/CMakeFiles/edit_cache.dir
+D:/android_projects/Group-4_Currency-converter/android/app/.cxx/Debug/1c1kl313/x86/CMakeFiles/rebuild_cache.dir

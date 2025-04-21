@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -26,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Settings Page Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(), // Only light theme used
+      theme: ThemeData.light(),
       home: SettingsPage(
         currentLanguage: _language,
         onLanguageChanged: _changeLanguage,
@@ -35,9 +34,26 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+const List<String> languages = [
+  'English',
+  'Spanish',
+  'French',
+  'German',
+  'Chichewa',
+  'Swahili',
+  'Arabic',
+  'Chinese',
+  'Portuguese',
+  'Hindi',
+  'Zulu',
+  'Afrikaans',
+  'Italian',
+  'Japanese',
+];
+
 class SettingsPage extends StatelessWidget {
   final String currentLanguage;
-  final Function(String) onLanguageChanged;
+  final ValueChanged<String> onLanguageChanged;
 
   const SettingsPage({
     super.key,
@@ -47,23 +63,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> languages = [
-      'English',
-      'Spanish',
-      'French',
-      'German',
-      'Chichewa',
-      'Swahili',
-      'Arabic',
-      'Chinese',
-      'Portuguese',
-      'Hindi',
-      'Zulu',
-      'Afrikaans',
-      'Italian',
-      'Japanese',
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -75,58 +74,100 @@ class SettingsPage extends StatelessWidget {
             leading: const Icon(Icons.language),
             title: const Text('Language'),
             subtitle: Text(currentLanguage),
-            onTap: () => _showLanguageDialog(context, languages),
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) => LanguageSelectorDialog(
+                currentLanguage: currentLanguage,
+                onSelected: onLanguageChanged,
+              ),
+            ),
           ),
           const Divider(),
-          const ListTile(
-            leading: Icon(Icons.info_outline),
-            title: Text('About App'),
-            subtitle: Text('Version 1.0.0\nDeveloped by group 4:\n 1.Praise khonje\n 2.joshua chilapondwa\n 3.aaliyah mbowani\n 4. augustine njala\n 5. paul narcisse'),
-            isThreeLine: true,
-          ),
+          const AboutAppTile(),
         ],
       ),
     );
   }
+}
 
-  void _showLanguageDialog(BuildContext context, List<String> languages) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        String selected = currentLanguage;
-        return AlertDialog(
-          title: const Text('Select Language'),
-          content: StatefulBuilder(
-            builder: (context, setState) => SizedBox(
-              width: double.maxFinite,
-              child: ListView(
-                shrinkWrap: true,
-                children: languages.map((lang) {
-                  return RadioListTile(
-                    title: Text(lang),
-                    value: lang,
-                    groupValue: selected,
-                    onChanged: (value) {
-                      setState(() {
-                        selected = value!;
-                      });
-                    },
-                  );
-                }).toList(),
-              ),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                onLanguageChanged(selected);
-                Navigator.pop(context);
+class LanguageSelectorDialog extends StatefulWidget {
+  final String currentLanguage;
+  final ValueChanged<String> onSelected;
+
+  const LanguageSelectorDialog({
+    super.key,
+    required this.currentLanguage,
+    required this.onSelected,
+  });
+
+  @override
+  State<LanguageSelectorDialog> createState() => _LanguageSelectorDialogState();
+}
+
+class _LanguageSelectorDialogState extends State<LanguageSelectorDialog> {
+  late String selected;
+
+  @override
+  void initState() {
+    super.initState();
+    selected = widget.currentLanguage;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Select Language'),
+      content: SizedBox(
+        width: double.maxFinite,
+        child: ListView(
+          shrinkWrap: true,
+          children: languages.map((lang) {
+            return RadioListTile<String>(
+              title: Text(lang),
+              value: lang,
+              groupValue: selected,
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    selected = value;
+                  });
+                }
               },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
+            );
+          }).toList(),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            widget.onSelected(selected);
+            Navigator.pop(context);
+          },
+          child: const Text('OK'),
+        ),
+      ],
+    );
+  }
+}
+
+class AboutAppTile extends StatelessWidget {
+  const AboutAppTile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const ListTile(
+      leading: Icon(Icons.info_outline),
+      title: Text('About App'),
+      subtitle: Text(
+        'Version 1.0.0\n'
+            'Developed by group 4:\n'
+            ' 1. Praise Khonje\n'
+            ' 2. Joshua Chilapondwa\n'
+            ' 3. Aaliyah Mbowani\n'
+            ' 4. Augustine Njala\n'
+            ' 5. Paul Narcisse',
+      ),
+      isThreeLine: true,
     );
   }
 }
