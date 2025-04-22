@@ -62,15 +62,15 @@ class _HomeTabState extends State<HomeTab> {
   List<DropdownMenuItem<String>> _buildCurrencyDropdownItems() {
     return currencies.entries
         .map((entry) => DropdownMenuItem(
-              value: entry.key,
-              child: Row(
-                children: [
-                  Text(entry.value, style: const TextStyle(fontSize: 20)),
-                  const SizedBox(width: 8),
-                  Text(entry.key),
-                ],
-              ),
-            ))
+      value: entry.key,
+      child: Row(
+        children: [
+          Text(entry.value, style: const TextStyle(fontSize: 20)),
+          const SizedBox(width: 8),
+          Text(entry.key),
+        ],
+      ),
+    ))
         .toList();
   }
 
@@ -118,7 +118,7 @@ class _HomeTabState extends State<HomeTab> {
           Card(
             elevation: 4,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -206,7 +206,7 @@ class _HomeTabState extends State<HomeTab> {
           Card(
             elevation: 4,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -214,9 +214,9 @@ class _HomeTabState extends State<HomeTab> {
                   Text(
                     'Converted Amount',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -268,14 +268,14 @@ class _HomeTabState extends State<HomeTab> {
                 SizedBox(height: 16),
                 Text(
                   'The Malawian Kwacha (MWK) is primarily traded against major currencies such as USD, ZAR, and EUR. Current rates are as follows (assumed):\n\n'
-                  '1 USD = 1160 MWK\n'
-                  '1 EUR = 1250 MWK\n'
-                  '1 ZAR = 75 MWK\n\n'
-                  'Stock Market (Assumed Data):\n'
-                  '- Illovo Sugar Plc: MWK 450/share\n'
-                  '- National Bank of Malawi: MWK 1050/share\n'
-                  '- Airtel Malawi: MWK 85/share\n\n'
-                  'These rates and stock data are sourced from reliable financial institutions.',
+                      '1 USD = 1160 MWK\n'
+                      '1 EUR = 1250 MWK\n'
+                      '1 ZAR = 75 MWK\n\n'
+                      'Stock Market (Assumed Data):\n'
+                      '- Illovo Sugar Plc: MWK 450/share\n'
+                      '- National Bank of Malawi: MWK 1050/share\n'
+                      '- Airtel Malawi: MWK 85/share\n\n'
+                      'These rates and stock data are sourced from reliable financial institutions.',
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ],
@@ -301,10 +301,9 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeTab(),
     const NewsFeed(),
     SettingsPage(
-  currentLanguage: 'English',
-  onLanguageChanged: (newLang) {
-  },
-),
+      currentLanguage: 'English',
+      onLanguageChanged: (newLang) {},
+    ),
   ];
 
   @override
@@ -314,29 +313,30 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('Currency App'), backgroundColor: Colors.white),
       body: _tabs[_selectedTabIndex],
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedTabIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedTabIndex = index;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.article),
-              label: 'News Feed',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.deepPurple,
-          backgroundColor: Colors.white),
+        currentIndex: _selectedTabIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedTabIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.article),
+            label: 'News Feed',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.deepPurple,
+        backgroundColor: Colors.grey[850], // ✅ Slightly dark background
+      ),
     );
   }
 }
